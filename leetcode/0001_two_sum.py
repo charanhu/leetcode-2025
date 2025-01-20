@@ -5,11 +5,14 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        complement = []
-        for i in range(len(nums)):
-            if nums[i] in complement:
-                return [nums.index(target - nums[i]), i]
-            complement.append(target - nums[i])
+        seen = {}
+        for i, num in enumerate(nums):
+            needed = target - num
+            if needed in seen:
+                return [seen[needed], i]
+            seen[num] = i
+        return []
+
 
 # 1. Two Sum
 # Solved
@@ -23,7 +26,6 @@ class Solution(object):
 
 # You can return the answer in any order.
 
- 
 
 # Example 1:
 
@@ -38,7 +40,7 @@ class Solution(object):
 
 # Input: nums = [3,3], target = 6
 # Output: [0,1]
- 
+
 
 # Constraints:
 
@@ -46,7 +48,7 @@ class Solution(object):
 # -109 <= nums[i] <= 109
 # -109 <= target <= 109
 # Only one valid answer exists.
- 
+
 
 # Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 # Seen this question in a real interview before?
