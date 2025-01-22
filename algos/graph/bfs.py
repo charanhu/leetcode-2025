@@ -1,28 +1,30 @@
-from collections import deque
-
 def bfs(graph, start):
     """
     Perform Breadth-First Search on 'graph' starting from 'start'.
     'graph' is a dict {node: [neighbors]}.
     Returns the order in which nodes are visited.
     """
-    visited = set()          # Keep track of visited nodes
-    order = []               # The order in which nodes are visited
-    queue = deque([start])   # Initialize the queue with the start node
+    visited = set()    # To track visited nodes
+    order = []         # List to record the visitation order
 
-    while queue:
-        current = queue.popleft()   # Dequeue the front node
+    queue = [start]    # Initialize the queue with the start node
+    head = 0           # Initialize the front pointer for the queue
+
+    while head < len(queue):  # While there are elements in the queue
+        current = queue[head]  # "Dequeue" an element from the front
+        head += 1
+
+        # Process current node if it hasn't been visited
         if current not in visited:
-            visited.add(current)    # Mark as visited
-            order.append(current)   # Record visitation
-            
+            visited.add(current)
+            order.append(current)
+
             # Enqueue all unvisited neighbors
             for neighbor in graph[current]:
                 if neighbor not in visited:
                     queue.append(neighbor)
-    
-    return order
 
+    return order
 
 # Example BFS usage:
 if __name__ == "__main__":
