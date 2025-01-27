@@ -30,7 +30,7 @@ class Solution(object):
                 current += diff[i]
                 if current < nums[i]:
                     feasible = False
-                    # break
+                    break
 
             if feasible:
                 result = mid
