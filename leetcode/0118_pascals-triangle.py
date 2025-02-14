@@ -1,16 +1,28 @@
-class Solution(object):
-    def generate(self, numRows):
-        """
-        :type numRows: int
-        :rtype: List[List[int]]
-        """
-        triangle=[]
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        # Initialize an empty list called "triangle" that will eventually contain all rows of Pascal's Triangle.
+        triangle = []
+        
+        # Loop over the number of rows we want to generate.
         for i in range(numRows):
-            row=[1]*(i+1)
+            # Create a new row with (i+1) elements, all initially set to 1.
+            # Why 1? Because in Pascal's Triangle, the first and last numbers of each row are always 1.
+            row = [1] * (i + 1)
+            
+            # For each row, we need to fill in the values between the first and last elements.
+            # The loop "for j in range(1, i)" iterates over the positions in the row that are not the first or the last.
             for j in range(1, i):
-                row[j]=triangle[i-1][j-1]+triangle[i-1][j]
+                # Each number in the middle is the sum of the two numbers directly above it in the previous row.
+                # "triangle[i-1][j-1]" is the number to the top-left,
+                # "triangle[i-1][j]" is the number directly above.
+                row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
+                
+            # After constructing the current row, add it to the triangle.
             triangle.append(row)
+        
+        # Return the complete triangle.
         return triangle
+
     
 
 #     118. Pascal's Triangle
