@@ -1,15 +1,29 @@
 class Solution:
     def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
-        max_ones=0
-        count=0
+        # Initialize two counters:
+        # current_count tracks the number of consecutive 1's in the current window.
+        # max_count stores the maximum number of consecutive 1's found so far.
+        current_count = 0
+        max_count = 0
+        
+        # Iterate through each number in the list.
         for num in nums:
-            if num==1:
-                count+=1
+            # If the current number is 1, we are in a window of consecutive ones.
+            if num == 1:
+                current_count += 1  # Increase the count for the current window.
             else:
-                count=0
-            max_ones=max(max_ones, count)
-        return max_ones
-            
+                # When a 0 is encountered, the window of consecutive 1's ends.
+                # Update max_count if the current window is larger.
+                max_count = max(max_count, current_count)
+                # Reset the current_count for the next window of 1's.
+                current_count = 0
+        
+        # After the loop, check one last time in case the array ends with a 1.
+        max_count = max(max_count, current_count)
+        
+        # Return the maximum window length of consecutive 1's.
+        return max_count
+
 
         
 
